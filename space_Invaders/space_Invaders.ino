@@ -1,12 +1,12 @@
 // ------------------ LIBRARIES --------------------
 #include <VGAX.h>
 
-
 // ------------------- INSTANCE LIBRARIES ---------------
 VGAX vga;
 
+
 // ------------------- TEMPORARY --------------------
-byte timeChange= 200;
+
 
 // -------------------- SPRITES -----------------
 #define IMG_ALIEN_WIDTH 10
@@ -111,28 +111,32 @@ void paint();
 void placePlayer();
 void newShoot();
 void newShootAlien();
-void moveNave(byte flyDirection);
+void moveNave();
 void moveAlien();
 void moveShoot();
 
 
 // ----------- SETUP PROGRAM -------------
 void setup() {
+
   vga.begin();
   vga.clear(0);
   newShoot();
-  
 
 }
 
 // ----------- LOOP PROGRAM -------------
 void loop() {
+
   paint();
+  moveNave();
+  moveNave();
   moveAlien();
+  vga.delay(20);
   newShootAlien();
+  moveAlien();
+  vga.delay(20);
   moveShoot();
-  moveNave(1);
-  vga.delay(50);
 }
 
 void paint(){
@@ -193,20 +197,25 @@ void newShootAlien(){
 }
 
 
-void moveNave(byte flyDirection){ ///////////// 0 left 1 dont move 2 right
-  if(flyDirection == 1){
-    return;
-  } else if (flyDirection ==0){ // left
-    if(naveGame.axisX-1 == 0){
-      return;
-    }
-    naveGame.axisX--;
-  } else if ( flyDirection ==2){ // right
-    if(naveGame.axisX+1 == 80){
-      return;
-    }
-     naveGame.axisX++;
-  }
+//void moveNave(byte flyDirection){ ///////////// 0 left 1 dont move 2 right
+//  if(flyDirection == 1){
+//    return;
+//  } else if (flyDirection ==0){ // left
+//    if(naveGame.axisX-1 == 0){
+//      return;
+//    }
+//    naveGame.axisX--;
+//  } else if ( flyDirection ==2){ // right
+//    if(naveGame.axisX+1 == 80){
+//      return;
+//    }
+//     naveGame.axisX++;
+//  }
+//}
+
+void moveNave(){
+  int valor = analogRead(1);
+  naveGame.axisX=(map(valor,0, 1023, 0 , 80));
 }
 
 
