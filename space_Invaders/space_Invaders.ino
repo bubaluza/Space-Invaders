@@ -142,10 +142,11 @@ void placePlayer(){
 }
 
 void newShoot(){
-  if (!shootGame[shootVector].visible) {
-    shootGame[shootVector] = { naveGame.axisX, naveGame.axisY, true };
-    shootVector++;
-    if(shootVector == 5 ){ shootVector = 0; }
+  for (int i = 0; i < 5; i++) {
+    if (!shootGame[i].visible) {
+      shootGame[i] = { naveGame.axisX+6, naveGame.axisY-1, true };
+      break;
+    }
   }
 }
 
