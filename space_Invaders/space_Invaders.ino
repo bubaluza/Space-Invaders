@@ -82,7 +82,11 @@ void loop() {
 void paint(){
   vga.clear(0);
   //alien
-
+  for ( i = 0; i < 8; i++) {
+    if(alienGame[i].alive){
+      vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, alienGame[i].axisX, alienGame[i].axisY) ;
+    }
+  }
   //player
 }
 
