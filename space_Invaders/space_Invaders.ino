@@ -121,7 +121,7 @@ void setup() {
   vga.begin();
   vga.clear(0);
   newShoot();
-  
+
 
 }
 
@@ -171,7 +171,7 @@ void placePlayer(){
 
 
 
-void newShoot(){
+void newShootNave(){
   for (byte i = 0; i < 5; i++) {
     if (!shootGameNave[i].visible) {
       shootGameNave[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
@@ -243,6 +243,20 @@ void moveShoot(){
         if( (shootGameAlien[i].axisY +1) == 60)
           shootGameAlien[i].visible=false;
           else shootGameAlien[i].axisY++;
+    }
+  }
+}
+
+void detectCollisionNave(){
+  for (byte i = 0; i < 3; i++) {
+    if (shootGameAlien[i].visible) {
+      for (byte w = 0; i < IMG_NAVE_WIDTH; i++) {
+        for (byte h = 0; i < IMG_NAVE_HEIGHT; i++) {
+          if((naveGame.axisX+IMG_NAVE_WIDTH) == shootGameAlien[i].axisX && (naveGame.axisY+IMG_NAVE_HEIGHT) == shootGameAlien[i].axisY ){
+            naveGame.alive = false;
+          }
+        }
+      }
     }
   }
 }
