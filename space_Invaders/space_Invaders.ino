@@ -137,19 +137,18 @@ void paint(){
   }
 }
 
-<<<<<<< HEAD
 void placePlayer(){
   vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, 45, 50);
 }
 
-void novoTiro(){
-  shootGame
-  shootVector
-  if(shootVector >  ){ shootVector = 0; }
+void newShoot(){
+  if (!shootGame[shootVector].visible) {
+    shootGame[shootVector] = { naveGame.axisX, naveGame.axisY, true };
+    shootVector++;
+    if(shootVector == 5 ){ shootVector = 0; }
+  }
 }
 
-=======
->>>>>>> 684adc8ae67f1a5f7297fc2bb94e9aa28a3fcc28
 
 void moveAlien(){
   if( (alienGame[3].axisX+1) ==80 ){
