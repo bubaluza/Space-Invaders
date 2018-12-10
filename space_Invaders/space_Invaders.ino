@@ -21,15 +21,15 @@ const unsigned char img_alien_data[IMG_ALIEN_HEIGHT][IMG_ALIEN_BWIDTH] PROGMEM={
 {   0,   0,   0, },
 };
 
-<<<<<<< HEAD
-typedef struct alien
+
+typedef struct
 {
   int axisX;
   int axisY;
   boolean alive;
-} record_type;
+} alien;
 
-record_type[8] = {
+ alien alienGame[8] = {
   {20, 0, true},
   {30, 0, true},
   {40, 0, true},
@@ -37,9 +37,9 @@ record_type[8] = {
   {20, 10, true},
   {30, 10, true},
   {40, 10, true},
-  {50, 10, true},
-}
-=======
+  {50, 10, true}
+};
+
 #define IMG_NAVE_WIDTH 11
 #define IMG_NAVE_BWIDTH 3
 #define IMG_NAVE_HEIGHT 10
@@ -57,7 +57,6 @@ const unsigned char img_nave_data[IMG_NAVE_HEIGHT][IMG_NAVE_BWIDTH] PROGMEM={
 {  42,   2, 160, },
 };
 
->>>>>>> ae0e06257b36f7c910f4bf240ee5e8609be638bd
 
 
 #define timeChange 200
