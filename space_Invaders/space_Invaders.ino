@@ -108,9 +108,13 @@ bool guidance=0;      //0 right 1 left
 
 // ------------ FUNCTION DECLARATION ---------
 void paint();
-void moveAlien();
-void newShoot();
 void placePlayer();
+void newShoot();
+void newShootAlien();
+void moveNave(byte flyDirection);
+void moveAlien();
+void moveShoot();
+
 
 // ----------- SETUP PROGRAM -------------
 void setup() {
@@ -127,6 +131,7 @@ void loop() {
   moveAlien();
   newShootAlien();
   moveShoot();
+  moveNave(1);
   vga.delay(50);
 }
 
@@ -188,8 +193,20 @@ void newShootAlien(){
 }
 
 
-void moveNave(bool flyDirection){
-  
+void moveNave(byte flyDirection){ ///////////// 0 left 1 dont move 2 right
+  if(flyDirection == 1){
+    return;
+  } else if (flyDirection ==0){ // left
+    if(naveGame.axisX-1 == 0){
+      return;
+    }
+    naveGame.axisX--;
+  } else if ( flyDirection ==2){ // right
+    if(naveGame.axisX+1 == 80){
+      return;
+    }
+     naveGame.axisX++;
+  }
 }
 
 
