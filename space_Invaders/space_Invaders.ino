@@ -104,12 +104,15 @@ bool guidance=0;      //0 right 1 left
 // ------------ FUNCTION DECLARATION ---------
 void paint();
 void moveAlien();
+void newShoot();
+void placePlayer();
 
 // ----------- SETUP PROGRAM -------------
 void setup() {
   vga.begin();
   vga.clear(0);
   newShoot();
+  
 }
 
 // ----------- LOOP PROGRAM -------------
@@ -117,7 +120,6 @@ void loop() {
   paint();
   moveAlien();
   vga.delay(50);
-
 }
 
 void paint(){
@@ -144,9 +146,13 @@ void paint(){
   }
 }
 
+
+
 void placePlayer(){
   vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, 45, 50);
 }
+
+
 
 void newShoot(){
   for (int i = 0; i < 5; i++) {
@@ -156,6 +162,8 @@ void newShoot(){
     }
   }
 }
+
+
 
 
 void moveAlien(){
@@ -174,5 +182,14 @@ void moveAlien(){
     alienGame[j].axisX--;
     }
   }
+}
 
+void moveShoot(){
+  for(int i=0;i<5;i++){
+    if(shootGameNave[i].visible){
+      if( (shootGameNave[i].axisY -1) == -1)
+        shootGameNave[i].visible=false;
+        else shootGameNave[i].axisY--;
+    } 
+  }
 }
