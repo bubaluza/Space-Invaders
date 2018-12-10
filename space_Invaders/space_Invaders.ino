@@ -61,10 +61,15 @@ typedef struct
   boolean visible;
 } shoot;
 
-int shootVector = 0;
-shoot shootGame[5] = {
+shoot shootGameNave[5] = {
  {0, 0, false},
  {0, 0, false},
+ {0, 0, false},
+ {0, 0, false},
+ {0, 0, false}
+};
+
+shoot shootGameAlien[3] = {
  {0, 0, false},
  {0, 0, false},
  {0, 0, false}
@@ -122,8 +127,6 @@ void loop() {
 
 void paint(){
   vga.clear(0);
-  //tiro
-    //TODO pintar os tiros
   //alien
   for (int i = 0; i < 8; i++) {
     if(alienGame[i].alive){
@@ -132,8 +135,8 @@ void paint(){
   }
   //shoot
   for( int i = 0;i<5;i++){
-    if(shootGame[i].visible){
-      vga.blitwmask( (byte*)(img_shoot_data)[0],(byte*)(img_shoot_data)[0], IMG_SHOOT_WIDTH , IMG_SHOOT_HEIGHT, shootGame[i].axisX, shootGame[i].axisY) ;
+    if(shootGameNave[i].visible){
+      vga.blitwmask( (byte*)(img_shoot_data)[0],(byte*)(img_shoot_data)[0], IMG_SHOOT_WIDTH , IMG_SHOOT_HEIGHT, shootGameNave[i].axisX, shootGameNave[i].axisY) ;
     }
   }
   //player
@@ -150,10 +153,17 @@ void placePlayer(){
 
 void newShoot(){
   for (int i = 0; i < 5; i++) {
-    if (!shootGame[i].visible) {
-      shootGame[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
+    if (!shootGameNave[i].visible) {
+      shootGameNave[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
       break;
     }
+  }
+}
+
+void newShootAlien(){
+  if (!shootGameAlien[random(0, 7)].visible) {
+    shootGameNave[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
+    break;
   }
 }
 
