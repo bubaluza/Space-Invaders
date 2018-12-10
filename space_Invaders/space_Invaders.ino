@@ -28,6 +28,15 @@ typedef struct
   boolean visivel;
 } tiro;
 
+int shootVector = 0;
+shoot shootGame[5] = {
+ {0, 0, false},
+ {0, 0, false},
+ {0, 0, false},
+ {0, 0, false},
+ {0, 0, false}
+};
+
 typedef struct
 {
   int axisX;
@@ -118,7 +127,11 @@ void placePlayer(){
   vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, 45, 50);
 }
 
-
+void novoTiro(){
+  shootGame
+  shootVector
+  if(shootVector >  ){ shootVector = 0; }
+}
 
 
 void moveAlien(){
