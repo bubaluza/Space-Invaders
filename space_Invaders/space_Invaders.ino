@@ -32,22 +32,29 @@ void setup() {
   vga.clear(0);
   placeAlien();
 
-  
+
 }
 
-void loop() {  
+void loop() {
   moveAlien(1);
-  
+
 
 }
 
+void placePlayer(){
+  vga.blitwmask( (byte*)(img_player_data)[0],(byte*)(img_player_data)[0], IMG_PLAYER_WIDTH , IMG_PLAYER_HEIGHT, 35, 50) ;
+}
+
+void movePlayer(){
+
+}
 
 void placeAlien(){
   vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 20, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 30, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 40, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 50, 0) ;
-  
+
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 20, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 30, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 40, 10) ;
@@ -63,7 +70,7 @@ void moveAlien(byte side){
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+50, 0) ;
-  
+
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 10) ;
@@ -76,7 +83,7 @@ void moveAlien(byte side){
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+50, 0) ;
-  
+
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 10) ;
