@@ -1,12 +1,12 @@
-
 // ------------------ LIBRARIES --------------------
 #include <VGAX.h>
+
 
 // ------------------- INSTANCE LIBRARIES ---------------
 VGAX vga;
 
 // ------------------- TEMPORARY --------------------
-#define timeChange 200
+byte timeChange= 200;
 
 // -------------------- SPRITES -----------------
 #define IMG_ALIEN_WIDTH 10
@@ -56,8 +56,8 @@ const unsigned char img_nave_data[IMG_NAVE_HEIGHT][IMG_NAVE_BWIDTH] PROGMEM={
 // ------------------------------  STRUCTS DECLARATION ---------------------------------------------------------
 typedef struct
 {
-  int axisX;
-  int axisY;
+  byte axisX;
+  byte axisY;
   boolean visible;
 } shoot;
 
@@ -77,15 +77,15 @@ shoot shootGameAlien[3] = {
 
 typedef struct
 {
-  int axisX;
-  int axisY;
-  int alive;
+  byte axisX;
+  byte axisY;
+  byte alive;
 } nave;
 
 typedef struct
 {
-  int axisX;
-  int axisY;
+  byte axisX;
+  byte axisY;
   boolean alive;
 } alien;
 
@@ -133,28 +133,23 @@ void loop() {
 void paint(){
   vga.clear(0);
   //alien
-  for (int i = 0; i < 8; i++) {
+  for (byte i = 0; i < 8; i++) {
     if(alienGame[i].alive){
       vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, alienGame[i].axisX, alienGame[i].axisY) ;
     }
   }
   //Nave shoot
-  for( int i = 0;i<5;i++){
+  for( byte i = 0;i<5;i++){
     if(shootGameNave[i].visible){
       vga.blitwmask( (byte*)(img_shoot_data)[0],(byte*)(img_shoot_data)[0], IMG_SHOOT_WIDTH , IMG_SHOOT_HEIGHT, shootGameNave[i].axisX, shootGameNave[i].axisY) ;
     }
   }
   //Alien shoot
-  for( int i = 0;i<3;i++){
+  for( byte i = 0;i<3;i++){
     if(shootGameAlien[i].visible){
       vga.blitwmask( (byte*)(img_shoot_data)[0],(byte*)(img_shoot_data)[0], IMG_SHOOT_WIDTH , IMG_SHOOT_HEIGHT, shootGameAlien[i].axisX, shootGameAlien[i].axisY) ;
     }
   }
-
-
-
-
-  
   //player
   if(naveGame.alive){
     vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, naveGame.axisX, naveGame.axisY) ;
@@ -172,7 +167,7 @@ void placePlayer(){
 
 
 void newShoot(){
-  for (int i = 0; i < 5; i++) {
+  for (byte i = 0; i < 5; i++) {
     if (!shootGameNave[i].visible) {
       shootGameNave[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
       break;
@@ -183,7 +178,7 @@ void newShoot(){
 void newShootAlien(){
   int alienRand = random(0, 7);
   if (alienGame[alienRand].alive) {
-    for (int i = 0; i < 3; i++) {
+    for (byte i = 0; i < 3; i++) {
       if (!shootGameAlien[i].visible) {
         shootGameAlien[i] = { alienGame[alienRand].axisX+4, alienGame[alienRand].axisY+10, true }; //+4 +10
         break;
@@ -192,6 +187,10 @@ void newShootAlien(){
   }
 }
 
+
+void moveNave(bool flyDirection){
+  
+}
 
 
 
@@ -214,7 +213,7 @@ void moveAlien(){
 }
 
 void moveShoot(){
-  for(int i=0;i<5;i++){
+  for(byte i=0;i<5;i++){
     if(shootGameNave[i].visible){
       if( (shootGameNave[i].axisY -1) == -1)
         shootGameNave[i].visible=false;
@@ -222,7 +221,7 @@ void moveShoot(){
     }
   }
 
-  for(int i=0;i<3;i++){
+  for(byte i=0;i<3;i++){
     if(shootGameAlien[i].visible){
         if( (shootGameAlien[i].axisY +1) == 60)
           shootGameAlien[i].visible=false;
