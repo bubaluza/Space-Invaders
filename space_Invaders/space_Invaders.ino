@@ -21,6 +21,7 @@ const unsigned char img_alien_data[IMG_ALIEN_HEIGHT][IMG_ALIEN_BWIDTH] PROGMEM={
 {   0,   0,   0, },
 };
 
+<<<<<<< HEAD
 typedef struct alien
 {
   int axisX;
@@ -38,11 +39,31 @@ record_type[8] = {
   {40, 10, true},
   {50, 10, true},
 }
+=======
+#define IMG_NAVE_WIDTH 11
+#define IMG_NAVE_BWIDTH 3
+#define IMG_NAVE_HEIGHT 10
+//data size=30 bytes
+const unsigned char img_nave_data[IMG_NAVE_HEIGHT][IMG_NAVE_BWIDTH] PROGMEM={
+{   0,   0,   0, },
+{   0,  48,   0, },
+{   0,  16,   0, },
+{   0,  84,   0, },
+{   1,  85,   0, },
+{   5, 101,  64, },
+{   5,  33,  64, },
+{   4,   0,  64, },
+{   8,   0, 128, },
+{  42,   2, 160, },
+};
+
+>>>>>>> ae0e06257b36f7c910f4bf240ee5e8609be638bd
 
 
 #define timeChange 200
 int i;
 void placeAlien();
+void moveAlien();
 
 
 void setup() {
@@ -50,12 +71,12 @@ void setup() {
   vga.clear(0);
   placeAlien();
 
-
+  
 }
 
-void loop() {
-  moveAlien(1);
-
+void loop() {  
+  moveAlien();
+  
 
 }
 
@@ -67,19 +88,16 @@ void paint(){
 }
 
 void placePlayer(){
-  vga.blitwmask( (byte*)(img_player_data)[0],(byte*)(img_player_data)[0], IMG_PLAYER_WIDTH , IMG_PLAYER_HEIGHT, 35, 50) ;
+  vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, 45, 50);
 }
 
-void movePlayer(){
-
-}
 
 void placeAlien(){
   vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 20, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 30, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 40, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 50, 0) ;
-
+  
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 20, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 30, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 40, 10) ;
@@ -87,15 +105,16 @@ void placeAlien(){
   i=0;
 }
 
-void moveAlien(byte side){
+void moveAlien(){
 
   for(i;(i+60)<80;i++){
   vga.clear(0);
+  placePlayer();
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+50, 0) ;
-
+  
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 10) ;
@@ -104,11 +123,12 @@ void moveAlien(byte side){
   }
     for(i;((i+20)!=0);i--){
   vga.clear(0);
+  placePlayer();
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 0) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+50, 0) ;
-
+  
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+30, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 10) ;
