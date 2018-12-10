@@ -109,6 +109,7 @@ void moveAlien();
 void setup() {
   vga.begin();
   vga.clear(0);
+  newShoot();
 }
 
 // ----------- LOOP PROGRAM -------------
@@ -129,6 +130,12 @@ void paint(){
       vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, alienGame[i].axisX, alienGame[i].axisY) ;
     }
   }
+  //shoot
+  for( int i = 0;i<5;i++){
+    if(shootGame[i].visible){
+      vga.blitwmask( (byte*)(img_shoot_data)[0],(byte*)(img_shoot_data)[0], IMG_SHOOT_WIDTH , IMG_SHOOT_HEIGHT, shootGame[i].axisX, shootGame[i].axisY) ;
+    }
+  }
   //player
   if(naveGame.alive){
     vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, naveGame.axisX, naveGame.axisY) ;
@@ -144,7 +151,7 @@ void placePlayer(){
 void newShoot(){
   for (int i = 0; i < 5; i++) {
     if (!shootGame[i].visible) {
-      shootGame[i] = { naveGame.axisX+6, naveGame.axisY-1, true };
+      shootGame[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
       break;
     }
   }
