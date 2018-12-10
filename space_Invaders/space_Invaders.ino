@@ -86,12 +86,13 @@ void placePlayer();
 void setup() {
   vga.begin();
   vga.clear(0);
-  placeAlien();
+  i=0;
 }
 
 void loop() {
+  paint();
   moveAlien();
-
+  vga.delay(50);
 
 }
 
@@ -118,20 +119,10 @@ void placePlayer(){
 }
 
 
-void placeAlien(){
-  vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 20, 0) ;
-  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 30, 0) ;
-  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 40, 0) ;
-  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 50, 0) ;
 
-  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 20, 10) ;
-  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 30, 10) ;
-  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 40, 10) ;
-  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, 50, 10) ;
-  i=0;
-}
 
 void moveAlien(){
+<<<<<<< HEAD
   if( (i+60)<80)
 
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 0) ;
@@ -159,4 +150,22 @@ void moveAlien(){
 //  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+50, 10) ;
 //  vga.delay(timeChange);
 //
+=======
+  if( (alienGame[3].axisX+1) ==80 ){
+    guidance=1;
+  } else if(  (alienGame[0].axisX-1) == 0  ){
+    guidance=0;
+  }
+  if(guidance==0){
+    for(byte j=0;j<8;j++){
+    alienGame[j].axisX++;
+    }
+  }
+  if(guidance==1){
+    for(byte j=0;j<8;j++){
+    alienGame[j].axisX--;
+    }   
+  }
+  
+>>>>>>> 993ba939ab04dec07940018742f6b03c5ec15a77
 }
