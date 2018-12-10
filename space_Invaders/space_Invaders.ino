@@ -117,6 +117,7 @@ void setup() {
   vga.begin();
   vga.clear(0);
   newShoot();
+  
 
 }
 
@@ -124,6 +125,8 @@ void setup() {
 void loop() {
   paint();
   moveAlien();
+  newShootAlien();
+  moveShoot();
   vga.delay(50);
 }
 
@@ -135,12 +138,23 @@ void paint(){
       vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, alienGame[i].axisX, alienGame[i].axisY) ;
     }
   }
-  //shoot
+  //Nave shoot
   for( int i = 0;i<5;i++){
     if(shootGameNave[i].visible){
       vga.blitwmask( (byte*)(img_shoot_data)[0],(byte*)(img_shoot_data)[0], IMG_SHOOT_WIDTH , IMG_SHOOT_HEIGHT, shootGameNave[i].axisX, shootGameNave[i].axisY) ;
     }
   }
+  //Alien shoot
+  for( int i = 0;i<3;i++){
+    if(shootGameAlien[i].visible){
+      vga.blitwmask( (byte*)(img_shoot_data)[0],(byte*)(img_shoot_data)[0], IMG_SHOOT_WIDTH , IMG_SHOOT_HEIGHT, shootGameAlien[i].axisX, shootGameAlien[i].axisY) ;
+    }
+  }
+
+
+
+
+  
   //player
   if(naveGame.alive){
     vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, naveGame.axisX, naveGame.axisY) ;
@@ -167,11 +181,11 @@ void newShoot(){
 }
 
 void newShootAlien(){
-  int rand = random(0, 7);
-  if (alienGame[rand].alive) {
-    for (i = 0; i < 3; i++) {
+  int alienRand = random(0, 7);
+  if (alienGame[alienRand].alive) {
+    for (int i = 0; i < 3; i++) {
       if (!shootGameAlien[i].visible) {
-        shootGameAlien[i] = { alienGame[rand].axisX+4, alienGame[rand].axisY+10, true };
+        shootGameAlien[i] = { alienGame[alienRand].axisX+4, alienGame[alienRand].axisY+10, true }; //+4 +10
         break;
       }
     }
@@ -205,6 +219,14 @@ void moveShoot(){
       if( (shootGameNave[i].axisY -1) == -1)
         shootGameNave[i].visible=false;
         else shootGameNave[i].axisY--;
+    }
+  }
+
+  for(int i=0;i<3;i++){
+    if(shootGameAlien[i].visible){
+        if( (shootGameAlien[i].axisY +1) == 60)
+          shootGameAlien[i].visible=false;
+          else shootGameAlien[i].axisY++;
     }
   }
 }
