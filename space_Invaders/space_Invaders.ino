@@ -21,6 +21,21 @@ const unsigned char img_alien_data[IMG_ALIEN_HEIGHT][IMG_ALIEN_BWIDTH] PROGMEM={
 {   0,   0,   0, },
 };
 
+typedef struct
+{
+  int axisX;
+  int axisY;
+  boolean visivel;
+} tiro;
+
+typedef struct
+{
+  int axisX;
+  int axisY;
+  int alive;
+} nave;
+
+nava naveGame = { 45, 50, true }
 
 typedef struct
 {
@@ -82,6 +97,8 @@ void loop() {
 
 void paint(){
   vga.clear(0);
+  //tiro
+    //TODO pintar os tiros
   //alien
   for ( i = 0; i < 8; i++) {
     if(alienGame[i].alive){
@@ -89,6 +106,11 @@ void paint(){
     }
   }
   //player
+  if(naveGame.alive){
+    vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, naveGame.axisX, naveGame.axisY) ;
+  }else{
+    //TODO tela de game over
+  }
 }
 
 void placePlayer(){
@@ -122,8 +144,8 @@ void moveAlien(){
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 10) ;
   vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+50, 10) ;
   vga.delay(timeChange);
-  
-    
+
+
 //  vga.clear(0);
 //  placePlayer();
 //  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+20, 0) ;
@@ -136,5 +158,5 @@ void moveAlien(){
 //  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+40, 10) ;
 //  vga.blitwmask((byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, i+50, 10) ;
 //  vga.delay(timeChange);
-//  
+//
 }
