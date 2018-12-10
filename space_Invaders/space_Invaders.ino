@@ -109,7 +109,7 @@ bool guidance=0;      //0 right 1 left
 // ------------ FUNCTION DECLARATION ---------
 void paint();
 void placePlayer();
-void newShoot();
+void newShootNave();
 void newShootAlien();
 void moveNave();
 void moveAlien();
@@ -121,7 +121,8 @@ void setup() {
 
   vga.begin();
   vga.clear(0);
-  newShoot();
+
+
 
 }
 
@@ -175,7 +176,7 @@ void placePlayer(){
 
 
 
-void newShoot(){
+void newShootNave(){
   for (byte i = 0; i < 5; i++) {
     if (!shootGameNave[i].visible) {
       shootGameNave[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
@@ -246,12 +247,48 @@ void moveShoot(){
         else shootGameNave[i].axisY--;
     }
   }
+  detectCollisionAlien();
 
   for(byte i=0;i<3;i++){
     if(shootGameAlien[i].visible){
         if( (shootGameAlien[i].axisY +1) == 60)
           shootGameAlien[i].visible=false;
           else shootGameAlien[i].axisY++;
+    }
+  }
+  detectCollisionNave();
+}
+
+void detectCollisionNave(){
+  for (byte i = 0; i < 3; i++) {
+    if (shootGameAlien[i].visible) {
+      for (byte w = 1; w+1 < IMG_NAVE_WIDTH; w++) {
+        for (byte h = 1; h+1 < IMG_NAVE_HEIGHT; h++) {
+          if((naveGame.axisX+w) == shootGameAlien[i].axisX && (naveGame.axisY+h) == shootGameAlien[i].axisY ){
+            naveGame.alive = false;
+            shootGameAlien[i].visible=false;
+            return;
+          }
+        }
+      }
+    }
+  }
+}
+
+void detectCollisionAlien(){
+  for (byte i = 0; i < 5; i++) {
+    if(shootGameNave[i].visible){
+      for (byte a = 0; a < 8; a++) {
+        if (alienGame[a].alive) {
+          for (byte w = 0; w < IMG_ALIEN_WIDTH; w++) {
+            for (byte h = 0; h < IMG_ALIEN_HEIGHT; h++) {
+              if((alienGame[a].axisX+IMG_ALIEN_WIDTH) == shootGameNave[i].axisX && (alienGame[a].axisY+IMG_ALIEN_HEIGHT) == shootGameAlien[i].axisY){
+                alienGame[a].alive = false;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
