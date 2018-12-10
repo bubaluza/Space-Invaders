@@ -117,7 +117,7 @@ void setup() {
   vga.begin();
   vga.clear(0);
   newShoot();
-  
+
 }
 
 // ----------- LOOP PROGRAM -------------
@@ -167,9 +167,14 @@ void newShoot(){
 }
 
 void newShootAlien(){
-  if (!shootGameAlien[random(0, 7)].visible) {
-    shootGameNave[i] = { naveGame.axisX+5, naveGame.axisY-1, true };
-    break;
+  int rand = random(0, 7);
+  if (alienGame[rand].alive) {
+    for (i = 0; i < 3; i++) {
+      if (!shootGameAlien[i].visible) {
+        shootGameAlien[i] = { alienGame[rand].axisX+4, alienGame[rand].axisY+10, true };
+        break;
+      }
+    }
   }
 }
 
@@ -200,6 +205,6 @@ void moveShoot(){
       if( (shootGameNave[i].axisY -1) == -1)
         shootGameNave[i].visible=false;
         else shootGameNave[i].axisY--;
-    } 
+    }
   }
 }
