@@ -1,9 +1,14 @@
+
+// ------------------ LIBRARIES --------------------
 #include <VGAX.h>
 
+// ------------------- INSTANCE LIBRARIES ---------------
 VGAX vga;
 
+// ------------------- TEMPORARY --------------------
+#define timeChange 200
 
-//image generated from 2BITIMAGE - by Sandro Maffiodo
+// -------------------- SPRITES -----------------
 #define IMG_ALIEN_WIDTH 10
 #define IMG_ALIEN_BWIDTH 3
 #define IMG_ALIEN_HEIGHT 10
@@ -21,47 +26,14 @@ const unsigned char img_alien_data[IMG_ALIEN_HEIGHT][IMG_ALIEN_BWIDTH] PROGMEM={
 {   0,   0,   0, },
 };
 
-typedef struct
-{
-  int axisX;
-  int axisY;
-  boolean visivel;
-} tiro;
-
-int shootVector = 0;
-shoot shootGame[5] = {
- {0, 0, false},
- {0, 0, false},
- {0, 0, false},
- {0, 0, false},
- {0, 0, false}
-};
-
-typedef struct
-{
-  int axisX;
-  int axisY;
-  int alive;
-} nave;
-
-nava naveGame = { 45, 50, true }
-
-typedef struct
-{
-  int axisX;
-  int axisY;
-  boolean alive;
-} alien;
-
- alien alienGame[8] = {
-  {20, 0, true},
-  {30, 0, true},
-  {40, 0, true},
-  {50, 0, true},
-  {20, 10, true},
-  {30, 10, true},
-  {40, 10, true},
-  {50, 10, true}
+#define IMG_SHOOT_WIDTH 1
+#define IMG_SHOOT_BWIDTH 1
+#define IMG_SHOOT_HEIGHT 3
+//data size=3 bytes
+const unsigned char img_shoot_data[IMG_SHOOT_HEIGHT][IMG_SHOOT_BWIDTH] PROGMEM={
+{ 192, },
+{ 192, },
+{ 192, },
 };
 
 #define IMG_NAVE_WIDTH 11
@@ -81,23 +53,65 @@ const unsigned char img_nave_data[IMG_NAVE_HEIGHT][IMG_NAVE_BWIDTH] PROGMEM={
 {  42,   2, 160, },
 };
 
+// ------------------------------  STRUCTS DECLARATION ---------------------------------------------------------
+typedef struct
+{
+  int axisX;
+  int axisY;
+  boolean visible;
+} shoot;
 
+int shootVector = 0;
+shoot shootGame[5] = {
+ {0, 0, false},
+ {0, 0, false},
+ {0, 0, false},
+ {0, 0, false},
+ {0, 0, false}
+};
 
-#define timeChange 200
-int i;
+typedef struct
+{
+  int axisX;
+  int axisY;
+  int alive;
+} nave;
+
+typedef struct
+{
+  int axisX;
+  int axisY;
+  boolean alive;
+} alien;
+
+// ------------ STRUCTS INSTANCE ----------------
+nave naveGame = { 45, 50, true };
+
+ alien alienGame[8] = {
+  {20, 0, true},
+  {30, 0, true},
+  {40, 0, true},
+  {50, 0, true},
+  {20, 10, true},
+  {30, 10, true},
+  {40, 10, true},
+  {50, 10, true}
+};
+
+// ------------ FLAGS ------------------
 bool guidance=0;      //0 right 1 left
 
-void placeAlien();
+// ------------ FUNCTION DECLARATION ---------
+void paint();
 void moveAlien();
-void placePlayer();
 
-
+// ----------- SETUP PROGRAM -------------
 void setup() {
   vga.begin();
   vga.clear(0);
-  i=0;
 }
 
+// ----------- LOOP PROGRAM -------------
 void loop() {
   paint();
   moveAlien();
@@ -110,7 +124,7 @@ void paint(){
   //tiro
     //TODO pintar os tiros
   //alien
-  for ( i = 0; i < 8; i++) {
+  for (int i = 0; i < 8; i++) {
     if(alienGame[i].alive){
       vga.blitwmask( (byte*)(img_alien_data)[0],(byte*)(img_alien_data)[0], IMG_ALIEN_WIDTH , IMG_ALIEN_HEIGHT, alienGame[i].axisX, alienGame[i].axisY) ;
     }
@@ -123,6 +137,7 @@ void paint(){
   }
 }
 
+<<<<<<< HEAD
 void placePlayer(){
   vga.blitwmask( (byte*)(img_nave_data)[0],(byte*)(img_nave_data)[0], IMG_NAVE_WIDTH , IMG_NAVE_HEIGHT, 45, 50);
 }
@@ -133,6 +148,8 @@ void novoTiro(){
   if(shootVector >  ){ shootVector = 0; }
 }
 
+=======
+>>>>>>> 684adc8ae67f1a5f7297fc2bb94e9aa28a3fcc28
 
 void moveAlien(){
   if( (alienGame[3].axisX+1) ==80 ){
