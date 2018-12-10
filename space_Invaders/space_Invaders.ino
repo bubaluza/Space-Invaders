@@ -260,3 +260,21 @@ void detectCollisionNave(){
     }
   }
 }
+
+void detectCollisionAlien(){
+  for (byte i = 0; i < 5; i++) {
+    if(shootGameNave[i].visible){
+      for (byte a = 0; a < 8; a++) {
+        if (alienGame[a].alive) {
+          for (byte w = 0; w < IMG_ALIEN_WIDTH; w++) {
+            for (byte h = 0; h < IMG_ALIEN_HEIGHT; h++) {
+              if((alienGame[a].axisX+IMG_ALIEN_WIDTH) == shootGameNave[i].axisX && (alienGame[a].axisY+IMG_ALIEN_HEIGHT) == shootGameAlien[i].axisY){
+                alienGame[a].alive = false;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
