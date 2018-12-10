@@ -21,6 +21,24 @@ const unsigned char img_alien_data[IMG_ALIEN_HEIGHT][IMG_ALIEN_BWIDTH] PROGMEM={
 {   0,   0,   0, },
 };
 
+typedef struct alien
+{
+  int axisX;
+  int axisY;
+  boolean alive;
+} record_type;
+
+record_type[8] = {
+  {20, 0, true},
+  {30, 0, true},
+  {40, 0, true},
+  {50, 0, true},
+  {20, 10, true},
+  {30, 10, true},
+  {40, 10, true},
+  {50, 10, true},
+}
+
 
 #define timeChange 200
 int i;
@@ -39,6 +57,13 @@ void loop() {
   moveAlien(1);
 
 
+}
+
+void paint(){
+  vga.clear(0);
+  //alien
+
+  //player
 }
 
 void placePlayer(){
